@@ -1,0 +1,26 @@
+{% extends "admin/main.html" %}
+
+{% block content %}
+<h1>Leave Details</h1>
+<br>
+<p><strong>Employee:</strong> {{ leave.employee }}</p>
+<!-- <br> -->
+<p><strong>Leave Type:</strong> {{ leave.leavetype }}</p>
+<!-- <br> -->
+<p><strong>Posting Date:</strong> {{ leave.posting_date }}</p>
+<p><strong>Duration:</strong> {{leave.fromdate}} - {{leave.todate}}</p>
+<br>
+
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <br>
+  <button type="submit">Update Leave</button>
+</form>
+
+<br>
+<p><strong>Message:</strong> {{ leave.description }}</p>
+<br>
+<a href="{% url 'myadmin:leave_history' %}">Back to Leave List</a>
+{% endblock %}

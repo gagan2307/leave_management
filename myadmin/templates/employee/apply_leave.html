@@ -1,0 +1,80 @@
+{% extends 'employee/main.html' %}
+{% block content %}
+
+<!-- Add Bootstrap CSS link -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<div class="container">
+    <center>
+        <h1 class="mt-5">Apply Leave</h1>
+    </center>
+    <form method="POST" name="addemp" class="leave-form">
+        {% csrf_token %}
+
+        <div class="card-body">
+            <center>
+                <h4 class="header-title">Leave Application Form</h4>
+            </center>
+            <p class="text-muted font-14 mb-4">Please fill out the form below.</p>
+
+            <div class="form-group">
+                {{ form.leavetype.label_tag }}
+                {{ form.leavetype }}
+            </div>
+
+            <div class="form-group">
+                {{ form.fromdate.label_tag }}
+                {{ form.fromdate }}
+            </div>
+
+            <div class="form-group">
+                {{ form.todate.label_tag }}
+                {{ form.todate }}
+            </div>
+
+            <div class="form-group">
+                <label class="col-form-label">Date Difference</label>
+                <input class="form-control" type="text" id="dateDifference"
+                    value="{% if date_difference is not None %}{{ date_difference }}{% endif %}" readonly>
+            </div>
+
+            <div class="form-group">
+                {{ form.description.label_tag }}
+                {{ form.description }}
+            </div>
+
+            <button class="btn btn-primary" name="apply" type="submit">SUBMIT</button>
+        </div>
+    </form>
+</div>
+
+<!-- Add Bootstrap JavaScript and jQuery links at the end of the body -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- JavaScript for calculating date difference on the client side -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fromDateInput = document.getElementById("id_fromdate");
+        const toDateInput = document.getElementById("id_todate");
+        const dateDifferenceInput = document.getElementById("dateDifference");
+
+        function calculateDateDifference() {
+            const fromDate = new Date(fromDateInput.value);
+            const toDate = new Date(toDateInput.value);
+            if (!isNaN(fromDate.getTime()) && !isNaN(toDate.getTime())) {
+                const differenceInTime = toDate.getTime() - fromDate.getTime();
+                const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+                dateDifferenceInput.value = differenceInDays >= 0 ? differenceInDays + " days" : "Invalid date range";
+            } else {
+                dateDifferenceInput.value = "";
+            }
+        }
+
+        fromDateInput.addEventListener("change", calculateDateDifference);
+        toDateInput.addEventListener("change", calculateDateDifference);
+    });
+</script>
+
+{% include 'employee/footer.html' %}
+{% endblock content %}

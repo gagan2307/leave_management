@@ -1,0 +1,26 @@
+{% load static %}
+
+<nav>
+  <ul class="metismenu" id="menu">
+    <li class="{% if page == 'dashboard' %}active{% endif %}"><a href="{% url 'myadmin:dashboard' %}"> <span>Dashboard</span></a></li>
+
+    <li class="{% if page == 'employee' %}active{% endif %}"><a href="{% url 'myadmin:employees' %}"> <span>Employee Section</span></a></li>
+
+    <li class="{% if page == 'department' %}active{% endif %}"><a href="{% url 'myadmin:department' %}"> <span>Department Section</span></a></li>
+
+    <li class="{% if page == 'leave' %}active{% endif %}"><a href="{% url 'myadmin:leavetype_list' %}"> <span>Leave Types</span></a></li>
+
+    <li class="{% if page == 'manage-leave' %}active{% endif %}">
+      <a href="javascript:void(0)" aria-expanded="true"><span>Manage Leave</span></a>
+
+      <ul class="collapse">
+        <li><a href="{% url 'myadmin:pending_leaves' %}"> Pending</a></li>
+        <li><a href="{% url 'myadmin:approved_leaves' %}"> Approved</a></li>
+        <li><a href="{% url 'myadmin:declined_leaves' %}"> Declined</a></li>
+        <li><a href="{% url 'myadmin:leave_history' %}"> Leave History</a></li>
+      </ul>
+    </li>
+
+    <li class="{% if page == 'manage-admin' %}active{% endif %}"><a href="{% url 'myadmin:manage_admin' %}"> <span>Manage Admin</span></a></li>
+  </ul>
+</nav>
