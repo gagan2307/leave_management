@@ -12,7 +12,6 @@
 <br>
 LOGIN CREDENTIALS
 <br>
-<br>
 ----> Employee
 <br>
 --------> Username: GTBIT039 / GTBIT 040 / GTBIT001 / GTBIT055
